@@ -1,0 +1,28 @@
+.createButton {
+    background: var(--blue-dark);
+    padding: 1rem;
+    border-radius: 10px;
+    color: var(--gray-100);
+    font-weight: bold;
+
+    border: none;
+
+    
+}
+.createButton:hover{
+
+    background-color: var(--blue);
+    cursor: pointer;
+}
+
+.plusCircleAndTextWrapper{
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    gap: 0.2rem;
+}
+.plusCircleAndTextWrapper >div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,17 @@
+.workBenchContainer {
+    background: red;
+
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+
+}
+
+.taskRegisterContainer{
+display: flex;
+gap: 1rem;
+position: absolute;
+top:-2rem;
+
+}

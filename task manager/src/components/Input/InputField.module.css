@@ -1,0 +1,11 @@
+.insertTaskInput{
+    padding: 1rem;
+    border-radius: 10px;
+
+    background: var(--gray-500);
+    color: var(--gray-300);
+}
+.insertTaskInput:focus{
+    outline: none;
+    border: 3px solid var(--purple-dark);
+}
