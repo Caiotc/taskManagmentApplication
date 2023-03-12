@@ -35,7 +35,7 @@ function WorkBench(){
                 }
             }}/>
         </section>
-        <TaskManager taskList={tasks} hasAnyTask={!!tasks.length}/>
+        <TaskManager updateTaskList={setTasks} taskList={tasks} hasAnyTask={!!tasks.length}/>
 
         </main>
     )

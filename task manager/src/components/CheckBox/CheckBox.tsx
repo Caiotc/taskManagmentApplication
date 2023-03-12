@@ -1,22 +1,35 @@
-import React, { InputHTMLAttributes } from "react";
+import React, { ChangeEvent, InputHTMLAttributes, useState } from "react";
 import styles from './CheckBox.module.css';
-import { CheckCircle,Circle } from "@phosphor-icons/react";
+import { Check, Circle } from "@phosphor-icons/react";
 
 
-function CheckBox(props :InputHTMLAttributes<HTMLInputElement>){
+function CheckBox(props: ICheckBox) {
+    const { toggleTask } = props;
+    const [inputChecked, setInputChecked] = useState(false);
     
+    const onClickNewRadioButton = () => {
+        toggleTask();
+        setInputChecked(!inputChecked);
+    }
+
+    const renderCheckBoxState = () => inputChecked ? 
+    (<div className={styles.CheckCircleWrapper}onClick={onClickNewRadioButton}>
+        <Check  size={16} />
+    </div>) : 
+    (<div onClick={onClickNewRadioButton} className={styles.checkBoxCustomStyle}>
+
+    </div>)
+
     return (
-        <label>
-        {/* <input className={styles.checkBoxCustomStyle} type="radio" onChange={props.onChange}/> */}
-        <div className={styles.checkBoxCustomStyle}/>
-        <CheckCircle size={24}/>
-        <Circle size={24}/>
-        </label>
+        <div className={styles.checkBoxWrapper}>
+            <input className={styles.checkRemoveTraditionalRadio} type="radio" checked />
+            {renderCheckBoxState()}
+        </div>
     )
 }
 
-interface ICheckBox extends InputHTMLAttributes<HTMLInputElement>{
-
+interface ICheckBox extends InputHTMLAttributes<HTMLInputElement> {
+    toggleTask: () => void
 }
 
 export default CheckBox;

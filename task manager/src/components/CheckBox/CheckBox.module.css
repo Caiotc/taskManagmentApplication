@@ -1,12 +1,43 @@
 .checkBoxCustomStyle{
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     background-color:var(--gray-400);
     border-radius: 50%;
-    border: 2px solid var(--blue);
+    border: 1px solid var(--blue);
+    display: flex;
+    justify-content: center;
+    
 }
 
 .checkBoxCustomStyle:hover{
-    background-color: fade(var(--blue-dark),50%) ;
+    background-color: var(--blue-dark) ;
+    cursor: pointer;
+}
+
+.checkRemoveTraditionalRadio{
+    appearance: none;
+
+}
+
+.checkBoxWrapper{
+    display: flex;
+}
+
+.CheckCircleWrapper{
+    width: 23px;
+    height: 23px;
+    display: flex;
+    color: white;
+    background: var(--purple-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+}
+
+.CheckCircleWrapper:hover{
+    background: var(--purple);
+    cursor: pointer;
 }
 

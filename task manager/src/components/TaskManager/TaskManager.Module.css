@@ -16,8 +16,7 @@
 .taskManagerBalance a{
     background: var(--gray-400);
     border-radius: 10px;
-    color: var(--gray-100);
-    display: inline-block;
+    color: var(--gray-100);    
     width: 1rem;
 
     text-align: center;

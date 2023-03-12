@@ -21,4 +21,9 @@
 
 }
 
+.TaskCompleted{
+    text-decoration: line-through;
+    color: var(--gray-300);
+}
+
 

@@ -6,8 +6,9 @@ import { ITask, Task } from "../Task/Task";
 
 function TaskManager(props: ITaskManager) {
 
-    const { taskList, hasAnyTask } = props;
-    const [createdTasks,setCreatedTasks] = useState<number>(0);
+    const { taskList, hasAnyTask, updateTaskList } = props;
+    const [createdTasks, setCreatedTasks] = useState<number>(0);
+    const [completedTasks,setCompletedTasks] = useState<number>(0);
 
 
     const taskManagerPlaceHolder = () => !hasAnyTask && (
@@ -22,19 +23,39 @@ function TaskManager(props: ITaskManager) {
 
         </div>);
 
-    const taskManagerTasks = () => hasAnyTask && taskList.map(({ id, isCompleted, taskDescription }) => (<Task id={id} isCompleted={isCompleted} taskDescription={taskDescription} />))
-    
-    useEffect(()=>{
+    const taskManagerTasks = () => hasAnyTask && taskList.map(({ id, isCompleted, taskDescription }) => (<Task
+        updateTask={(Task:ITask) => {
+            let newArray = [...taskList];
+            const indexOf = newArray.indexOf(Task);
+            newArray[indexOf] = Task;
+            updateTaskList(newArray);
+            if(Task.isCompleted){
+                setCompletedTasks(completedTasks + 1);
+            }
+            else{
+                setCompletedTasks(completedTasks -1);
+            }
+
+        }} 
+        deleteTask={(Task:ITask)=>{
+            updateTaskList(taskList.filter((el)=>el.id !== Task.id));
+            setCreatedTasks(createdTasks - 1);
+            if(Task.isCompleted)
+                setCompletedTasks(completedTasks -1)
+        }}
+        id={id} isCompleted={isCompleted} taskDescription={taskDescription} />))
+
+    useEffect(() => {
         setCreatedTasks(taskList.length);
-    },[taskList.length]);
+    }, [taskList.length]);
 
     return (
         <main className={styles.taskManagerWrapper}>
             <section className={styles.taskManagerBalance}>
                 <div><p>Tarefas criadas <a>{createdTasks}</a></p></div>
-                <div><p>Concluidas <a>0</a></p></div>
+                <div><p>Concluidas <a>{`${completedTasks} de ${createdTasks}`}</a></p></div>
             </section>
-            <section className={hasAnyTask ? styles.taskManagerContainerHasTask: styles.taskManagerContainer  }>
+            <section className={hasAnyTask ? styles.taskManagerContainerHasTask : styles.taskManagerContainer}>
                 {taskManagerPlaceHolder()}
                 {taskManagerTasks()}
             </section>
@@ -45,7 +66,8 @@ function TaskManager(props: ITaskManager) {
 
 interface ITaskManager {
     taskList: Array<ITask>,
-    hasAnyTask: boolean
+    hasAnyTask: boolean,
+    updateTaskList: any
 
 }
 
