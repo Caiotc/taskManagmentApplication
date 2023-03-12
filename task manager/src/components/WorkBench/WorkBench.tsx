@@ -1,16 +1,14 @@
-import { useState,ChangeEvent, useEffect } from 'react';
+import { useState,ChangeEvent } from 'react';
 import styles from './WorkBench.module.css';
 import InputField from '../Input/InputField';
 import Button from '../Button/Button';
+import { ITask } from "../Task/Task";
+import TaskManager from '../TaskManager/TaskManager';
 
-interface Task{
-    index:number,
-    taskDescription:string,
-    isCompleted:Boolean
-}
+
 function WorkBench(){
     const [newInputedTaskValue,setNewInputedTaskValue] = useState('');
-    const [tasks,setTasks] = useState<Array<Task>>([]);
+    const [tasks,setTasks] = useState<Array<ITask>>([]);
 
 
 
@@ -18,26 +16,26 @@ function WorkBench(){
         setNewInputedTaskValue(event.target.value);
     };
 
-    useEffect(()=>{console.log("!@# taks atualizadas ",tasks,newInputedTaskValue)},[tasks,newInputedTaskValue]);
     return(
         <main className={styles.workBenchContainer}>      
         <section className={styles.taskRegisterContainer}>  
             <InputField placeHolder='Adicione uma nova tarefa' type='text' onChange={onChange}/>
             <Button createButton text='Criar' onClick={()=>{
                 
-                const newTask :Task = 
-                {index:0,taskDescription:newInputedTaskValue,isCompleted:false};
+                const newTask :ITask = 
+                {id:0,taskDescription:newInputedTaskValue,isCompleted:false};
                 if(!tasks.length)
                     setTasks([...tasks,newTask])
                 else{                    
                     let lastTask =  tasks[tasks.length-1];
                     
                     if(lastTask)
-                    newTask.index = lastTask.index + 1;
+                    newTask.id = lastTask.id + 1;
                     setTasks([...tasks,newTask]);
                 }
             }}/>
         </section>
+        <TaskManager taskList={tasks} hasAnyTask={!!tasks.length}/>
 
         </main>
     )
